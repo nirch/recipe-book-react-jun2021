@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
 import { Button, Modal, Form, Row, Col, Image } from 'react-bootstrap';
 
-function NewRecipeModal({ show, onClose }) {
+function NewRecipeModal({ show, onClose, onCreate }) {
     const [name, setName] = useState("");
     const [desc, setDesc] = useState("");
     const [imgURL, setImgURL] = useState("");
 
+    function clearForm() {
+        setName("");
+        setDesc("");
+        setImgURL("");
+    }
+
     function createRecipe() {
-        console.log(name, desc, imgURL);
+        onCreate(name, desc, imgURL);
+        clearForm();
+        onClose();
     }
 
     return (

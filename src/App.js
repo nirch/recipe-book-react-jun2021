@@ -17,6 +17,18 @@ function App() {
 
   const activeUserRecipes = activeUser ? recipes.filter(recipe => recipe.userId === activeUser.id) : [];
 
+  function createRecipe(name, desc, imgURL) {
+    const newRecipe = new RecipeModel({
+      id: recipes[recipes.length -1].id + 1,
+      name,
+      desc,
+      img: imgURL,
+      userId: activeUser.id
+    });
+
+    setRecipes(recipes.concat(newRecipe));
+  }
+
   return (
     <div>
       
@@ -31,7 +43,7 @@ function App() {
           </Route>
           <Route exact path="/recipes">
             <RecipeNavbar activeUser={activeUser} onLogout={() => setActiveUser()}/>
-            <RecipesPage activeUser={activeUser} recipes={activeUserRecipes}/>
+            <RecipesPage activeUser={activeUser} recipes={activeUserRecipes} onNewRecipe={createRecipe}/>
           </Route>
         </Switch>
       </HashRouter>
