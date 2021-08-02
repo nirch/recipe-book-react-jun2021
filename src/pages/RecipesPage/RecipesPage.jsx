@@ -1,7 +1,8 @@
 import React from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Button, Col, Container, Row } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import RecipeCard from '../../components/RecipeCard/RecipeCard';
+import "./RecipesPage.css"
 
 function RecipesPage({activeUser, recipes}) {
 
@@ -13,7 +14,10 @@ function RecipesPage({activeUser, recipes}) {
     return (
         <div className="p-recipes">
             <Container>
-                <h1>{activeUser.fname}'s Recipes</h1>
+                <div className="heading">
+                    <h1>{activeUser.fname}'s Recipes</h1>
+                    <Button>New Recipe</Button>
+                </div>
                 <Row>
                     {recipes.map(recipe => 
                         <Col key={recipe.id} md={3} sm={6}>
