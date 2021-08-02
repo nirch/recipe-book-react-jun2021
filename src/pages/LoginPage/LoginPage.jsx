@@ -1,21 +1,45 @@
 import React from 'react';
 import { useState } from 'react';
-import { Button, Container, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Button, Container, Form, Alert } from 'react-bootstrap';
+import { Link, Redirect } from 'react-router-dom';
 import './LoginPage.css'
 
-function LoginPage({users}) {
+function LoginPage({activeUser, users, onLogin}) {
     const [email, setEmail] = useState("");
     const [pwd, setPwd] = useState("");
+    const [showInvalidLogin, setShowInvalidLogin] = useState(false);
+
+    if (activeUser) {
+        return <Redirect to="/recipes"/>
+    }
 
     function login() {
-        console.log(email, pwd);
+        
+        // let activeUser = null;
+        // for (const user of users) {
+        //     if (user.email === email && user.pwd === pwd) {
+        //         activeUser = user;
+        //         break;
+        //     }
+        // }
+
+        const activeUser = users.find(user => user.email === email && user.pwd === pwd);
+
+        if (activeUser) {
+            // Invoke parent (App) function to update the activeUser state in the app
+            onLogin(activeUser);
+        } else {
+            // Showing an alert
+            setShowInvalidLogin(true);
+        }
     }
 
     return (
         <div className="p-login">
             <h1>Login to Recipe Book</h1>
             <p>or <Link to="/signup">create an account</Link></p>
+            {showInvalidLogin ?
+                <Alert variant="danger" onClose={() => setShowInvalidLogin(false)} dismissible>Invalid Credentials!</Alert> : null}
             <Form>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
