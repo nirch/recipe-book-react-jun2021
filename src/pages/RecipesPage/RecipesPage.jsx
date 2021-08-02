@@ -1,9 +1,12 @@
 import React from 'react';
+import { Container } from 'react-bootstrap';
 
 function RecipesPage(props) {
     return (
         <div className="p-recipes">
-            RecipesPage
+            <Container>
+                RecipesPage
+            </Container>
         </div>
     );
 }

@@ -1,9 +1,12 @@
 import React from 'react';
+import { Container } from 'react-bootstrap';
 
 function LoginPage(props) {
     return (
         <div className="p-login">
-            LoginPage
+            <Container>
+                LoginPage
+            </Container>
         </div>
     );
 }
