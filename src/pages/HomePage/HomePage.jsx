@@ -5,7 +5,8 @@ function HomePage(props) {
     return (
         <div className="p-home">
             <Container>
-                HomePage
+                <h1 className="display-1">Recipe Book</h1>
+                <p>Master your recipes</p>
             </Container>
         </div>
     );
