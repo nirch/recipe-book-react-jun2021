@@ -1,6 +1,7 @@
 import React from 'react';
-import { Container } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
+import RecipeCard from '../../components/RecipeCard/RecipeCard';
 
 function RecipesPage({activeUser, recipes}) {
 
@@ -13,7 +14,13 @@ function RecipesPage({activeUser, recipes}) {
         <div className="p-recipes">
             <Container>
                 <h1>{activeUser.fname}'s Recipes</h1>
-                {recipes.map(recipe => <p key={recipe.id}>{recipe.name}</p>)}
+                <Row>
+                    {recipes.map(recipe => 
+                        <Col key={recipe.id} md={3} sm={6}>
+                            <RecipeCard recipe={recipe}/>
+                        </Col>
+                    )}
+                </Row>
             </Container>
         </div>
     );
