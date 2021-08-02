@@ -1,7 +1,15 @@
-import React from 'react';
-import { Button, Modal, Form, Row, Col } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Button, Modal, Form, Row, Col, Image } from 'react-bootstrap';
 
 function NewRecipeModal({ show, onClose }) {
+    const [name, setName] = useState("");
+    const [desc, setDesc] = useState("");
+    const [imgURL, setImgURL] = useState("");
+
+    function createRecipe() {
+        console.log(name, desc, imgURL);
+    }
+
     return (
         <Modal show={show} onHide={onClose} size="lg">
             <Modal.Header closeButton>
@@ -14,7 +22,7 @@ function NewRecipeModal({ show, onClose }) {
                             Recipe Name
                         </Form.Label>
                         <Col sm={9}>
-                            <Form.Control type="text" />
+                            <Form.Control type="text" value={name} onChange={e => setName(e.target.value)} />
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="formHorizontalDesc">
@@ -22,7 +30,7 @@ function NewRecipeModal({ show, onClose }) {
                             Recipe Description
                         </Form.Label>
                         <Col sm={9}>
-                            <Form.Control type="text" />
+                            <Form.Control type="text" value={desc} onChange={e => setDesc(e.target.value)}  />
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="formHorizontalImage">
@@ -30,17 +38,17 @@ function NewRecipeModal({ show, onClose }) {
                             Recipe Image URL
                         </Form.Label>
                         <Col sm={9}>
-                            <Form.Control type="text" />
+                            <Form.Control type="text" value={imgURL} onChange={e => setImgURL(e.target.value)}  />
                         </Col>
                     </Form.Group>
-
                 </Form>
+                <Image src={imgURL}/>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={onClose}>
                     Cancel
                 </Button>
-                <Button variant="primary" onClick={onClose}>
+                <Button variant="primary" onClick={createRecipe}>
                     Create Recipe
                 </Button>
             </Modal.Footer>
