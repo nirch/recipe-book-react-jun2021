@@ -11,7 +11,7 @@ function RecipesPage({activeUser}) {
     return (
         <div className="p-recipes">
             <Container>
-                RecipesPage
+                <h1>{activeUser.fname}'s Recipes</h1>
             </Container>
         </div>
     );

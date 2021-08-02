@@ -5,8 +5,8 @@ import { Link, Redirect } from 'react-router-dom';
 import './LoginPage.css'
 
 function LoginPage({activeUser, users, onLogin}) {
-    const [email, setEmail] = useState("");
-    const [pwd, setPwd] = useState("");
+    const [email, setEmail] = useState("nir@nir.com");
+    const [pwd, setPwd] = useState("123");
     const [showInvalidLogin, setShowInvalidLogin] = useState(false);
 
     if (activeUser) {
