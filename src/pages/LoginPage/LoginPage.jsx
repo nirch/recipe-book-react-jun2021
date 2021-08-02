@@ -4,7 +4,7 @@ import { Button, Container, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './LoginPage.css'
 
-function LoginPage(props) {
+function LoginPage({users}) {
     const [email, setEmail] = useState("");
     const [pwd, setPwd] = useState("");
 
