@@ -1,7 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
-import { Button, Col, Container, Modal, Row } from 'react-bootstrap';
+import { Button, Col, Container, Row } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
+import NewRecipeModal from '../../components/NewRecipeModal/NewRecipeModal';
 import RecipeCard from '../../components/RecipeCard/RecipeCard';
 import "./RecipesPage.css"
 
@@ -27,24 +28,7 @@ function RecipesPage({ activeUser, recipes }) {
                     )}
                 </Row>
             </Container>
-
-
-            <Modal show={showRecipeModal} onHide={() => setShowRecipeModal(false)}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setShowRecipeModal(false)}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={() => setShowRecipeModal(false)}>
-                        Save Changes
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-
-
+            <NewRecipeModal show={showRecipeModal} onClose={() => setShowRecipeModal(false)} />
         </div>
     );
 }
