@@ -7,10 +7,15 @@ import HomePage from './pages/HomePage/HomePage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import RecipesPage from './pages/RecipesPage/RecipesPage';
 import jsonUsers from './data/users.json';
+import jsonRecipes from './data/recipes.json';
+import RecipeModel from './model/RecipeModel';
 
 function App() {
   const [users, setUsers] = useState(jsonUsers.map(plainUser => new UserModel(plainUser)));
+  const [recipes, setRecipes] = useState(jsonRecipes.map(plainRecipe => new RecipeModel(plainRecipe)));
   const [activeUser, setActiveUser] = useState();
+
+  const activeUserRecipes = activeUser ? recipes.filter(recipe => recipe.userId === activeUser.id) : [];
 
   return (
     <div>
@@ -26,7 +31,7 @@ function App() {
           </Route>
           <Route exact path="/recipes">
             <RecipeNavbar activeUser={activeUser} onLogout={() => setActiveUser()}/>
-            <RecipesPage activeUser={activeUser}/>
+            <RecipesPage activeUser={activeUser} recipes={activeUserRecipes}/>
           </Route>
         </Switch>
       </HashRouter>
