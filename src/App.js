@@ -17,13 +17,13 @@ function App() {
       <HashRouter>
         <Switch>
           <Route exact path="/">
-            <RecipeNavbar activeUser={activeUser}/>
+            <RecipeNavbar activeUser={activeUser} onLogout={() => setActiveUser(null)}/>
             <HomePage/>
           </Route>
           <Route exact path="/login"><LoginPage/></Route>
           <Route exact path="/recipes">
-            <RecipeNavbar activeUser={activeUser}/>
-            <RecipesPage/>
+            <RecipeNavbar activeUser={activeUser} onLogout={() => setActiveUser(null)}/>
+            <RecipesPage activeUser={activeUser}/>
           </Route>
         </Switch>
       </HashRouter>
