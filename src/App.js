@@ -6,9 +6,10 @@ import HomePage from './pages/HomePage/HomePage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import RecipesPage from './pages/RecipesPage/RecipesPage';
 import Parse from 'parse';
+import UserModel from './model/UserModel';
 
 function App() {
-  const [activeUser, setActiveUser] = useState();
+  const [activeUser, setActiveUser] = useState(Parse.User.current() ? new UserModel(Parse.User.current()) : null);
 
   function logout() {
     Parse.User.logOut();
