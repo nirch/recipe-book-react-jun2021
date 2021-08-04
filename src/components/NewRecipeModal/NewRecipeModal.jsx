@@ -4,18 +4,22 @@ import { Button, Modal, Form, Row, Col, Image } from 'react-bootstrap';
 function NewRecipeModal({ show, onClose, onCreate }) {
     const [name, setName] = useState("");
     const [desc, setDesc] = useState("");
-    const [imgURL, setImgURL] = useState("");
+    const [img, setImg] = useState(null);
 
     function clearForm() {
         setName("");
         setDesc("");
-        setImgURL("");
+        setImg(null);
     }
 
     function createRecipe() {
-        onCreate(name, desc, imgURL);
+        onCreate(name, desc, img ? URL.createObjectURL(img) : "");
         clearForm();
         onClose();
+    }
+
+    function handleFileChange(e) {
+        setImg(e.target.files[0]);
     }
 
     return (
@@ -43,14 +47,14 @@ function NewRecipeModal({ show, onClose, onCreate }) {
                     </Form.Group>
                     <Form.Group as={Row} className="mb-3" controlId="formHorizontalImage">
                         <Form.Label column sm={3}>
-                            Recipe Image URL
+                            Recipe Image
                         </Form.Label>
                         <Col sm={9}>
-                            <Form.Control type="text" value={imgURL} onChange={e => setImgURL(e.target.value)}  />
+                            <Form.Control type="file" accept="image/*" onChange={handleFileChange}  />
                         </Col>
                     </Form.Group>
                 </Form>
-                <Image src={imgURL}/>
+                <Image src={img ? URL.createObjectURL(img) : ""}/>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={onClose}>
