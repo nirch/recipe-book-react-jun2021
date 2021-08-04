@@ -1,37 +1,34 @@
 import React from 'react';
 import { useState } from 'react';
-import { Button, Container, Form, Alert } from 'react-bootstrap';
+import { Button, Form, Alert, Spinner } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
 import './LoginPage.css'
+import Parse from 'parse';
+import UserModel from '../../model/UserModel';
 
-function LoginPage({activeUser, users, onLogin}) {
+function LoginPage({activeUser, onLogin}) {
     const [email, setEmail] = useState("nir@nir.com");
     const [pwd, setPwd] = useState("123");
     const [showInvalidLogin, setShowInvalidLogin] = useState(false);
+    const [loggingIn, setLoggingIn] = useState(false);
 
     if (activeUser) {
         return <Redirect to="/recipes"/>
     }
 
     function login() {
-        
-        // let activeUser = null;
-        // for (const user of users) {
-        //     if (user.email === email && user.pwd === pwd) {
-        //         activeUser = user;
-        //         break;
-        //     }
-        // }
+        setLoggingIn(true);
 
-        const activeUser = users.find(user => user.email === email && user.pwd === pwd);
-
-        if (activeUser) {
+        Parse.User.logIn(email, pwd).then(user => {
             // Invoke parent (App) function to update the activeUser state in the app
-            onLogin(activeUser);
-        } else {
+            onLogin(new UserModel(user));
+        }).catch(err => {
+            console.error(err);
             // Showing an alert
-            setShowInvalidLogin(true);
-        }
+            setShowInvalidLogin(true);            
+        }).finally(() => {
+            setLoggingIn(false);
+        });
     }
 
     return (
@@ -56,8 +53,8 @@ function LoginPage({activeUser, users, onLogin}) {
                         value={pwd} onChange={e => setPwd(e.target.value)} />
                 </Form.Group>
                 <div className="d-grid gap-2">
-                    <Button variant="success" type="button" onClick={login}>
-                        Login
+                    <Button variant="success" type="button" onClick={login} disabled={loggingIn}>
+                        Login {loggingIn ? <Spinner animation="border" /> : null}
                     </Button>
                 </div>
             </Form>
