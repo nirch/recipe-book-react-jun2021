@@ -10,10 +10,9 @@ import Parse from 'parse';
 import RecipeModel from '../../model/RecipeModel';
 
 
-function RecipesPage({ activeUser, onNewRecipe}) {
+function RecipesPage({ activeUser }) {
     const [recipes, setRecipes] = useState([]);
     const [showRecipeModal, setShowRecipeModal] = useState(false)
-
 
     useEffect(() => {
         // Fetching recipes from server
@@ -25,6 +24,23 @@ function RecipesPage({ activeUser, onNewRecipe}) {
             setRecipes(parseRecipes.map(parseRecipe => new RecipeModel(parseRecipe)));
         });
     }, [activeUser]);
+
+    function createRecipe(name, desc, imgFile) {
+        const RecipeTable = Parse.Object.extend('Recipe');
+        const newParseRecipe = new RecipeTable();
+
+        newParseRecipe.set("name", name);
+        newParseRecipe.set("desc", desc);
+        newParseRecipe.set("image", new Parse.File(imgFile.name, imgFile));
+        newParseRecipe.set("userId", Parse.User.current());
+
+        newParseRecipe.save().then(parseRecipe => {
+            setRecipes(recipes.concat(new RecipeModel(parseRecipe)));
+        }).catch(err => {
+            console.error(err);
+        })
+    }
+
 
     if (!activeUser) {
         return <Redirect to="/" />
@@ -45,7 +61,7 @@ function RecipesPage({ activeUser, onNewRecipe}) {
                     )}
                 </Row>
             </Container>
-            <NewRecipeModal show={showRecipeModal} onClose={() => setShowRecipeModal(false)} onCreate={onNewRecipe}/>
+            <NewRecipeModal show={showRecipeModal} onClose={() => setShowRecipeModal(false)} onCreate={createRecipe}/>
         </div>
     );
 }

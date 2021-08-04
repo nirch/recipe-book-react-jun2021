@@ -5,7 +5,6 @@ import RecipeNavbar from './components/RecipeNavbar/RecipeNavbar';
 import HomePage from './pages/HomePage/HomePage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import RecipesPage from './pages/RecipesPage/RecipesPage';
-import RecipeModel from './model/RecipeModel';
 import Parse from 'parse';
 
 function App() {
@@ -15,18 +14,6 @@ function App() {
     Parse.User.logOut();
     setActiveUser();
   }
-
-  // function createRecipe(name, desc, imgURL) {
-  //   const newRecipe = new RecipeModel({
-  //     id: recipes[recipes.length -1].id + 1,
-  //     name,
-  //     desc,
-  //     img: imgURL,
-  //     userId: activeUser.id
-  //   });
-
-  //   setRecipes(recipes.concat(newRecipe));
-  // }
 
   return (
     <div>

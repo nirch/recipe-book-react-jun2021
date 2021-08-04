@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Modal, Form, Row, Col, Image } from 'react-bootstrap';
+import './NewRecipeModal.css'
 
 function NewRecipeModal({ show, onClose, onCreate }) {
     const [name, setName] = useState("");
@@ -13,7 +14,7 @@ function NewRecipeModal({ show, onClose, onCreate }) {
     }
 
     function createRecipe() {
-        onCreate(name, desc, img ? URL.createObjectURL(img) : "");
+        onCreate(name, desc, img);
         clearForm();
         onClose();
     }
@@ -23,7 +24,7 @@ function NewRecipeModal({ show, onClose, onCreate }) {
     }
 
     return (
-        <Modal show={show} onHide={onClose} size="lg">
+        <Modal show={show} onHide={onClose} size="lg" className="c-recipe-modal">
             <Modal.Header closeButton>
                 <Modal.Title>New Recipe</Modal.Title>
             </Modal.Header>
