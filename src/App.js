@@ -13,7 +13,7 @@ import RecipeModel from './model/RecipeModel';
 function App() {
   const [users, setUsers] = useState(jsonUsers.map(plainUser => new UserModel(plainUser)));
   const [recipes, setRecipes] = useState(jsonRecipes.map(plainRecipe => new RecipeModel(plainRecipe)));
-  const [activeUser, setActiveUser] = useState();
+  const [activeUser, setActiveUser] = useState(localStorage.activeUser ? JSON.parse(localStorage.activeUser) : null);
 
   const activeUserRecipes = activeUser ? recipes.filter(recipe => recipe.userId === activeUser.id) : [];
 
@@ -29,6 +29,17 @@ function App() {
     setRecipes(recipes.concat(newRecipe));
   }
 
+
+  function login(activeUser) {
+    setActiveUser(activeUser);
+    localStorage.setItem("activeUser", JSON.stringify(activeUser));
+  }
+
+  function logout() {
+    setActiveUser(null);
+    localStorage.removeItem("activeUser");
+  }
+
   return (
     <div>
       
@@ -39,10 +50,10 @@ function App() {
             <HomePage/>
           </Route>
           <Route exact path="/login">
-            <LoginPage activeUser={activeUser} users={users} onLogin={activeUser => setActiveUser(activeUser)}/>
+            <LoginPage activeUser={activeUser} users={users} onLogin={login}/>
           </Route>
           <Route exact path="/recipes">
-            <RecipeNavbar activeUser={activeUser} onLogout={() => setActiveUser()}/>
+            <RecipeNavbar activeUser={activeUser} onLogout={logout}/>
             <RecipesPage activeUser={activeUser} recipes={activeUserRecipes} onNewRecipe={createRecipe}/>
           </Route>
         </Switch>
