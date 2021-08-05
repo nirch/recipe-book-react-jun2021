@@ -26,7 +26,7 @@ function RecipesPage({ activeUser }) {
         fetchData();
     }, [activeUser]);
 
-    function createRecipe(name, desc, imgFile) {
+    async function createRecipe(name, desc, imgFile) {
         const RecipeTable = Parse.Object.extend('Recipe');
         const newParseRecipe = new RecipeTable();
 
@@ -35,11 +35,8 @@ function RecipesPage({ activeUser }) {
         newParseRecipe.set("image", new Parse.File(imgFile.name, imgFile));
         newParseRecipe.set("userId", Parse.User.current());
 
-        newParseRecipe.save().then(parseRecipe => {
-            setRecipes(recipes.concat(new RecipeModel(parseRecipe)));
-        }).catch(err => {
-            console.error(err);
-        })
+        const savedRecipe = await newParseRecipe.save();
+        setRecipes(recipes.concat(new RecipeModel(savedRecipe)));
     }
 
 
