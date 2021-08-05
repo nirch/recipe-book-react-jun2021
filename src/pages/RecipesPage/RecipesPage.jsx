@@ -15,14 +15,15 @@ function RecipesPage({ activeUser }) {
     const [showRecipeModal, setShowRecipeModal] = useState(false)
 
     useEffect(() => {
-        // Fetching recipes from server
-        const RecipeTable = Parse.Object.extend('Recipe');
-        const query = new Parse.Query(RecipeTable);
-        query.equalTo('userId', Parse.User.current());
-        query.find().then(parseRecipes => {
-            console.log(parseRecipes);
+        async function fetchData() {
+            // Fetching recipes from server
+            const RecipeTable = Parse.Object.extend('Recipe');
+            const query = new Parse.Query(RecipeTable);
+            query.equalTo('userId', Parse.User.current());
+            const parseRecipes = await query.find();
             setRecipes(parseRecipes.map(parseRecipe => new RecipeModel(parseRecipe)));
-        });
+        }
+        fetchData();
     }, [activeUser]);
 
     function createRecipe(name, desc, imgFile) {
