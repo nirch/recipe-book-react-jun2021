@@ -16,19 +16,19 @@ function LoginPage({activeUser, onLogin}) {
         return <Redirect to="/recipes"/>
     }
 
-    function login() {
+    async function login() {
         setLoggingIn(true);
-
-        Parse.User.logIn(email, pwd).then(user => {
+        try {
+            const user = await Parse.User.logIn(email, pwd);
             // Invoke parent (App) function to update the activeUser state in the app
             onLogin(new UserModel(user));
-        }).catch(err => {
-            console.error(err);
+        } catch(err) {
             // Showing an alert
-            setShowInvalidLogin(true);            
-        }).finally(() => {
+            console.error(err);
+            setShowInvalidLogin(true); 
+        } finally {
             setLoggingIn(false);
-        });
+        }
     }
 
     return (
