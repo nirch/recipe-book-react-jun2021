@@ -9,6 +9,7 @@ import RecipesPage from './pages/RecipesPage/RecipesPage';
 import jsonUsers from './data/users.json';
 import jsonRecipes from './data/recipes.json';
 import RecipeModel from './model/RecipeModel';
+import ActiveUserContext from './shared/ActiveUserContext';
 
 function App() {
   const [users, setUsers] = useState(jsonUsers.map(plainUser => new UserModel(plainUser)));
@@ -42,22 +43,23 @@ function App() {
 
   return (
     <div>
-      
-      <HashRouter>
-        <Switch>
-          <Route exact path="/">
-            <RecipeNavbar activeUser={activeUser} onLogout={() => setActiveUser()}/>
-            <HomePage/>
-          </Route>
-          <Route exact path="/login">
-            <LoginPage activeUser={activeUser} users={users} onLogin={login}/>
-          </Route>
-          <Route exact path="/recipes">
-            <RecipeNavbar activeUser={activeUser} onLogout={logout}/>
-            <RecipesPage activeUser={activeUser} recipes={activeUserRecipes} onNewRecipe={createRecipe}/>
-          </Route>
-        </Switch>
-      </HashRouter>
+      <ActiveUserContext.Provider value={activeUser}>
+        <HashRouter>
+          <Switch>
+            <Route exact path="/">
+              <RecipeNavbar onLogout={() => setActiveUser()}/>
+              <HomePage/>
+            </Route>
+            <Route exact path="/login">
+              <LoginPage users={users} onLogin={login}/>
+            </Route>
+            <Route exact path="/recipes">
+              <RecipeNavbar onLogout={logout}/>
+              <RecipesPage recipes={activeUserRecipes} onNewRecipe={createRecipe}/>
+            </Route>
+          </Switch>
+        </HashRouter>
+      </ActiveUserContext.Provider>
     </div>
   );
 }

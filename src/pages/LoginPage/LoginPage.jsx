@@ -1,13 +1,16 @@
 import React from 'react';
+import { useContext } from 'react';
 import { useState } from 'react';
-import { Button, Container, Form, Alert } from 'react-bootstrap';
+import { Button, Form, Alert } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
+import ActiveUserContext from '../../shared/ActiveUserContext';
 import './LoginPage.css'
 
-function LoginPage({activeUser, users, onLogin}) {
+function LoginPage({users, onLogin}) {
     const [email, setEmail] = useState("nir@nir.com");
     const [pwd, setPwd] = useState("123");
     const [showInvalidLogin, setShowInvalidLogin] = useState(false);
+    const activeUser = useContext(ActiveUserContext);
 
     if (activeUser) {
         return <Redirect to="/recipes"/>

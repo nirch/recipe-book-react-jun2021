@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
+import ActiveUserContext from '../../shared/ActiveUserContext';
 
-function RecipeNavbar({activeUser, onLogout}) {
+function RecipeNavbar({onLogout}) {
+    const activeUser = useContext(ActiveUserContext);
+
     return (
         <div className="c-navbar">
             <Navbar bg="light" expand="lg">

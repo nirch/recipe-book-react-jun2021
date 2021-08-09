@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useState } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import NewRecipeModal from '../../components/NewRecipeModal/NewRecipeModal';
 import RecipeCard from '../../components/RecipeCard/RecipeCard';
+import ActiveUserContext from '../../shared/ActiveUserContext';
 import "./RecipesPage.css"
 
-function RecipesPage({ activeUser, recipes, onNewRecipe}) {
+function RecipesPage({recipes, onNewRecipe}) {
     const [showRecipeModal, setShowRecipeModal] = useState(false)
+    const activeUser = useContext(ActiveUserContext);
 
     if (!activeUser) {
         return <Redirect to="/" />
