@@ -24,6 +24,7 @@ function App() {
       name,
       desc,
       img: imgURL,
+      difficulty: 1,
       userId: activeUser.id
     });
 
