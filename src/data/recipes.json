@@ -4,6 +4,7 @@
         "name": "Shakshuka",
         "desc": "Eggs dish with tomato sauce",
         "img": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/shakshuka-1620054075.jpg?crop=0.845xw:0.845xh;0.116xw,0.00680xh&resize=640:*",
+        "difficulty": 1,
         "userId": 1
     }, 
     {
@@ -11,6 +12,7 @@
         "name": "Shnitzel",
         "desc": "Austrian dish",
         "img": "https://www.thespruceeats.com/thmb/cckc3_4QUQ79kSFhcLPM8xg9F3g=/3797x2848/smart/filters:no_upscale()/wiener-schnitzel-recipe-1447089-Hero-5b587d6c46e0fb0071b0059d.jpg",
+        "difficulty": 2,
         "userId": 1
     },
     {
@@ -18,6 +20,7 @@
         "name": "Spicy Shakshuka",
         "desc": "Eggs dish with tomato sauce",
         "img": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/shakshuka-1620054075.jpg?crop=0.845xw:0.845xh;0.116xw,0.00680xh&resize=640:*",
+        "difficulty": 2,
         "userId": 2
     }, 
     {
@@ -25,6 +28,7 @@
         "name": "Spicy Shnitzel",
         "desc": "Austrian dish",
         "img": "https://www.thespruceeats.com/thmb/cckc3_4QUQ79kSFhcLPM8xg9F3g=/3797x2848/smart/filters:no_upscale()/wiener-schnitzel-recipe-1447089-Hero-5b587d6c46e0fb0071b0059d.jpg",
+        "difficulty": 2,
         "userId": 2
     }
 ]
