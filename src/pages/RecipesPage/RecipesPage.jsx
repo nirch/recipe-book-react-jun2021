@@ -7,39 +7,43 @@ import RecipeCard from '../../components/RecipeCard/RecipeCard';
 import ActiveUserContext from '../../shared/ActiveUserContext';
 import "./RecipesPage.css"
 import { Pie } from 'react-chartjs-2';
+import { useMemo } from 'react';
 
 function RecipesPage({ recipes, onNewRecipe }) {
     const [showRecipeModal, setShowRecipeModal] = useState(false)
     const activeUser = useContext(ActiveUserContext);
-    
-    let easyRecipes = 0;
-    let hardRecipes = 0;
-    for (const recipe of recipes) {
-        if (recipe.difficulty === 1) {
-            ++easyRecipes;
-        } else {
-            ++hardRecipes;
-        }
-    }
 
-    const chartData = {
-        labels: ['Easy', 'Hard'],
-        datasets: [
-            {
-                label: '# of Recipes',
-                data: [easyRecipes, hardRecipes],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                ],
-                borderWidth: 1,
-            },
-        ],
-    };
+    const chartData = useMemo(() => {
+        console.log("calculating chartData");
+        let easyRecipes = 0;
+        let hardRecipes = 0;
+        for (const recipe of recipes) {
+            if (recipe.difficulty === 1) {
+                ++easyRecipes;
+            } else {
+                ++hardRecipes;
+            }
+        }
+
+        return {
+            labels: ['Easy', 'Hard'],
+            datasets: [
+                {
+                    label: '# of Recipes',
+                    data: [easyRecipes, hardRecipes],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                    ],
+                    borderWidth: 1,
+                },
+            ],
+        }
+    }, [recipes])
 
 
     if (!activeUser) {
