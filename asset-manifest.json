@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/recipe-book-react-jun2021/static/css/main.af23e512.chunk.css",
+    "main.js": "/recipe-book-react-jun2021/static/js/main.79244de6.chunk.js",
+    "main.js.map": "/recipe-book-react-jun2021/static/js/main.79244de6.chunk.js.map",
+    "runtime-main.js": "/recipe-book-react-jun2021/static/js/runtime-main.c58dc837.js",
+    "runtime-main.js.map": "/recipe-book-react-jun2021/static/js/runtime-main.c58dc837.js.map",
+    "static/css/2.4be38407.chunk.css": "/recipe-book-react-jun2021/static/css/2.4be38407.chunk.css",
+    "static/js/2.fb2996a1.chunk.js": "/recipe-book-react-jun2021/static/js/2.fb2996a1.chunk.js",
+    "static/js/2.fb2996a1.chunk.js.map": "/recipe-book-react-jun2021/static/js/2.fb2996a1.chunk.js.map",
+    "static/js/3.8eb284b1.chunk.js": "/recipe-book-react-jun2021/static/js/3.8eb284b1.chunk.js",
+    "static/js/3.8eb284b1.chunk.js.map": "/recipe-book-react-jun2021/static/js/3.8eb284b1.chunk.js.map",
+    "index.html": "/recipe-book-react-jun2021/index.html",
+    "static/css/2.4be38407.chunk.css.map": "/recipe-book-react-jun2021/static/css/2.4be38407.chunk.css.map",
+    "static/css/main.af23e512.chunk.css.map": "/recipe-book-react-jun2021/static/css/main.af23e512.chunk.css.map",
+    "static/js/2.fb2996a1.chunk.js.LICENSE.txt": "/recipe-book-react-jun2021/static/js/2.fb2996a1.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c58dc837.js",
+    "static/css/2.4be38407.chunk.css",
+    "static/js/2.fb2996a1.chunk.js",
+    "static/css/main.af23e512.chunk.css",
+    "static/js/main.79244de6.chunk.js"
+  ]
+}
